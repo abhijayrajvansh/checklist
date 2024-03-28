@@ -8,18 +8,13 @@ interface ListHeaderProps {
 
 const ListHeader:React.FC<ListHeaderProps> = ({listName}) => {
 
-  const signout = () => {
-    console.log('cliked sign out')
-  }
-
   return (
-    <div className="flex justify-between text-lg sm:text-4xl font-medium py-4 border-b text-black">
+    <div className="flex justify-between text-2xl sm:text-4xl font-medium py-4 border-b">
       
       <h1>{listName}</h1>
 
       <div className='flex space-x-5'>
-        <Button size='sm'>add new</Button>
-        <Button size='sm' onClick={signout}>sign out</Button>
+        <Button size='sm' className='text-sm font-medium text-black' color='success'>add new</Button>
       </div>
 
     </div>

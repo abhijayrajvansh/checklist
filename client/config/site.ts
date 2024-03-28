@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Rajvansh.js + RajvanshUI",
-	description: "Build awesome web apps with dynamic front-end technologies.",
+	name: "Checklist",
+	description: "Build with ❤️ by Abhijay Rajvansh",
 	
 	links: {
 		github: "https://github.com/abhijayrajvansh",
