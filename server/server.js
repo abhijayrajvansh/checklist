@@ -6,13 +6,12 @@ const pool = require('./db')
 
 app.use(cors())
 
-
-// get all checklists
+// get all checklists...
 app.get('/checklists/:userEmail', async (req, res) => {
-  const { userEmail } = req.params
-
+  const { userEmail } = req.params;
   try {
     const checklists = await pool.query('SELECT * FROM checklists WHERE user_email = $1', [userEmail])
+    console.log(checklists)
     res.json(checklists.rows)
   } catch (error) {
     console.log(console.error(error));

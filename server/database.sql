@@ -13,3 +13,9 @@ CREATE TABLE users (
   hashed_password VARCHAR(255)
 );
 
+INSERT INTO checklists(
+  id, user_email, title, progress, date
+) VALUES(
+  '1', 'abhijay@test.com', 'macbook local checklist', 3, '2024-03-28'
+);
+
