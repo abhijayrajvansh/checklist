@@ -17,14 +17,13 @@ const Home = () => {
 	const userEmail = "abhijay@test.com";
 	const [tasks, setTasks  ] = useState<ChecklistItem[]>([]);
 
-	let host_URI = 'http://192.168.29.40:8000/checklists/'
+	let host_URI = 'http://localhost:8000/checklists/'
 	
 	const checklist_URI = host_URI + userEmail
 
 	const getData = async () => {
 		try {	
 			const resposne = await fetch(checklist_URI)
-			console.log((checklist_URI))
 			const json = await resposne.json()
 			setTasks(json)
 		} catch (error) {
