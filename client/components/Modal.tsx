@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 
-export default function App() {
+interface taskItemProp {
+  id: string;
+  user_email: string;
+  title: string;
+  progress: number;
+  date: string;
+}
+
+interface ModalProps {
+  job?: string,
+  task?: taskItemProp,
+}
+
+const ModalStructure:React.FC<ModalProps> = ({job, task}) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const mode = 'add'
+
+  const [checklistData, setChecklistData  ] = useState({
+    user_email: job === 'edit' ? task?.user_email : "",
+    title: job === 'edit' ? task?.title : "",
+    progress: job === 'edit' ? task?.progress : "",
+    date: job === 'edit' ? "" : new Date()
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+
+    setChecklistData(data => ({
+      ...data,
+      [name] : value
+    }));
+  }
 
   return (
     <>
-      <Button onPress={onOpen} size='sm' className='text-sm font-medium' color='secondary'>Add New</Button>
+      {
+        job === 'edit' ? 
+          <Button onPress={onOpen} size='sm' className='text-sm font-medium' color='success'>Edit</Button> :
+          <Button onPress={onOpen} size='sm' className='text-sm font-medium' color='secondary'>Add New</Button>
+      }
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent className="bg-white">
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">{mode} your checklist</ModalHeader>
-              
-              
+              <ModalHeader className="flex flex-col gap-1">{job == 'edit' ? 'Edit' : 'Add'} Your Checklist</ModalHeader>
               
               <ModalBody>
                 <form>
@@ -23,16 +53,25 @@ export default function App() {
                     type="text" 
                     required maxLength={30} 
                     placeholder=" Your task goes here"
-                    // value={""}
+                    name="title"
+                    value={checklistData.title}
+                    onChange={handleChange}
                     />
 
-                  {/* <input type="text" /> */}
-                  {/* <input type="submit" /> */}
+                  <p className="font-semibold my-2 mt-5">Drag to {job == 'edit' ? 'edit' : 'select'} progress of your checklist.</p>
+
+                  <input className="w-full"
+                    required
+                    type="range" 
+                    min={0} max={100}
+                    name="progress"
+                    value={checklistData.progress}
+                    onChange={handleChange}
+                  />
                 </form>
               </ModalBody>
               
-              
-              
+
               <ModalFooter>
                 <Button size="sm" className="text-sm font-medium" color="danger" variant="flat" onPress={onClose}>
                   Close
@@ -48,3 +87,5 @@ export default function App() {
     </>
   );
 }
+
+export default ModalStructure;

@@ -1,4 +1,5 @@
 import {Button, Checkbox} from "@nextui-org/react" ;
+import Modal from '@/components/Modal';
 
 interface ChecklistItem {
   id: string;
@@ -19,7 +20,7 @@ const ListItem:React.FC<ListItemProps> = ({task}) => {
           <p className="text-sm sm:text-lg">{task.title}</p>
         </Checkbox>
         <div className="space-x-5 items-end flex sm:block flex-col space-y-1">
-          <Button size="sm" variant="solid" className="font-medium text-sm" color="success">Edit</Button>
+          <Modal job="edit" task={task}/>
           <Button size="sm" variant="solid" className="font-medium text-sm bg-red-500">Delete</Button>
         </div>
       </div>

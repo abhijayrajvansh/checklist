@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
 import Modal from '@/components/Modal';
 
 interface ListHeaderProps {
