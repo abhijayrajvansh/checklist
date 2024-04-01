@@ -1,15 +1,10 @@
 import '@/styles/globals.css'
 import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Providers } from "./provider";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const poppins = Poppins({ 
-	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-	subsets: ['latin']
-})
 
 export const metadata: Metadata = {
 	title: {

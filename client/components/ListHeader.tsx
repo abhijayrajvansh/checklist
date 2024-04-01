@@ -16,7 +16,6 @@ const ListHeader:React.FC<ListHeaderProps> = ({listName}) => {
       <div className='flex space-x-5'>
         <Button size='sm' className='text-sm font-medium text-black' color='success'>add new</Button>
       </div>
-
     </div>
   )
 }
