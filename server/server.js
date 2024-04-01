@@ -33,8 +33,10 @@ app.post('/checklists', async (req, res) => {
   const id = uuidv4()
   const { userEmail, title, progress, date } = req.body; 
   try {
-    await pool.query('INSERT INTO checklists (id, user_email, title, progress, date) VALUES ($1, $2, $3, $4, $5);', 
+    const newChecklist = await pool.query('INSERT INTO checklists (id, user_email, title, progress, date) VALUES ($1, $2, $3, $4, $5);', 
     [id, userEmail, title, progress, date])
+
+    console.log(newChecklist.json)
 
     res.send({ msg: 'success' })
   } 
