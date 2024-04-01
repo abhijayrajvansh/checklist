@@ -12,15 +12,16 @@ interface taskItemProp {
 interface ModalProps {
   job?: string,
   task?: taskItemProp,
+  getData: () => Promise<any>
 }
 
-const ModalStructure:React.FC<ModalProps> = ({job, task}) => {
+const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const [checklistData, setChecklistData  ] = useState({
-    user_email: job === 'edit' ? task?.user_email : "",
+    user_email: job === 'edit' ? task?.user_email : "abhijay@test.com",
     title: job === 'edit' ? task?.title : "",
-    progress: job === 'edit' ? task?.progress : "",
+    progress: job === 'edit' ? task?.progress : 30,
     date: job === 'edit' ? "" : new Date()
   });
 
@@ -31,6 +32,28 @@ const ModalStructure:React.FC<ModalProps> = ({job, task}) => {
       ...data,
       [name] : value
     }));
+  }
+
+  const createChecklist = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // event.preventDefault()
+    try {
+      const response = await fetch("http://localhost:8000/checklists", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checklistData)
+      })
+      setChecklistData({ user_email: '', title: '', progress: 30, date: ''})
+      getData()
+    } 
+    catch (error) {
+      console.log('error:', error)
+    }
+  }
+
+  const editChecklist = () => {
+    console.log('clicked on edit')
   }
 
   return (
@@ -76,7 +99,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task}) => {
                 <Button size="sm" className="text-sm font-medium" color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button size="sm" className="text-sm font-medium" color="primary" onPress={onClose}>
+                <Button size="sm" className="text-sm font-medium" color="primary" onClick={job === 'edit' ? editChecklist : createChecklist} onPress={onClose}>
                   Save
                 </Button>
               </ModalFooter>
@@ -84,7 +107,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task}) => {
           )}
         </ModalContent>
       </Modal>
-    </>
+    </> 
   );
 }
 

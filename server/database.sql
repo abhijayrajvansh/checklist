@@ -20,9 +20,7 @@ INSERT INTO checklists(
   '0', 'abhijay@test.com', 'modified first checklist', 12, '2024-04-01'
 );
 
-
 INSERT INTO checklists (id, user_email, title, progress, date) VALUES ('4', 'abhijay@test.com', 'another checklist from express', 50, '2024-03-28');
-
 
 
 -- Read syntax

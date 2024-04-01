@@ -4,9 +4,10 @@ import Modal from '@/components/Modal';
 
 interface ListHeaderProps {
   listName: string,
+  getData: () => Promise<any>
 }
 
-const ListHeader:React.FC<ListHeaderProps> = ({listName}) => {
+const ListHeader:React.FC<ListHeaderProps> = ({listName, getData}) => {
 
   return (
     <div>
@@ -15,7 +16,7 @@ const ListHeader:React.FC<ListHeaderProps> = ({listName}) => {
         <h1 className='font-semibold'>{listName}</h1>
 
         <div className='flex space-x-5'>
-          <Modal />
+          <Modal getData={getData}/>
         </div>
       
       </div>

@@ -8,6 +8,8 @@ const { v4: uuidv4 } = require("uuid");
 app.use(cors());
 app.use(express.json()); // now express can use and parse json, yayy!
 
+
+// fetch all checklists
 app.get("/checklists/", async (req, res) => {
   try {
     const response = await pool.query("SELECT * FROM checklists;");
@@ -17,7 +19,7 @@ app.get("/checklists/", async (req, res) => {
   }
 });
 
-// get all checklists...
+// fetch all checklists from specific user
 app.get("/checklists/:userEmail", async (req, res) => {
   const { userEmail } = req.params;
   try {
@@ -32,35 +34,33 @@ app.get("/checklists/:userEmail", async (req, res) => {
 });
 
 
-
 // create a new checklist
 app.post("/checklists", async (req, res) => {
   const id = uuidv4();
-  const { userEmail, title, progress, date } = req.body;
+  const { user_email, title, progress, date } = req.body;
   
   try {
-    const newChecklist = await pool.query(
+    await pool.query(
       "INSERT INTO checklists (id, user_email, title, progress, date) VALUES ($1, $2, $3, $4, $5);",
-      [id, userEmail, title, progress, date]
+      [id, user_email, title, Number(progress), date]
     );
 
     res.send({ msg: "success" });
   } catch (error) {
     console.error(error);
-  }
+  } 
 });
-
 
 
 // edit a checklist
 app.put('/checklists/:id', async(req, res) => {
   try {
     const { id } = req.params;
-    const { user_email, title, progress, date} = req.body;
+    const { title, progress, date} = req.body;
 
-    const modifiedChecklist = await pool.query(
-      "UPDATE checklists SET user_email = $1, title = $2, progress = $3, date = $4 WHERE id = $5;", 
-      [user_email, title, progress, date, id]
+    await pool.query(
+      "UPDATE checklists SET title = $1, progress = $2, date = $3 WHERE id = $4;", 
+      [title, progress, date, id]
     );
     
     res.send({ msg: 'success'});
@@ -70,6 +70,20 @@ app.put('/checklists/:id', async(req, res) => {
   }
 })
 
+
+// delete a checklist
+app.delete('/checklists/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query("DELETE FROM checklists WHERE id = $1;", [id])
+    res.send({ msg: 'success' })
+  } 
+  
+  
+  catch (error) {
+    console.log('error: ', error)
+  }
+})
 
 
 

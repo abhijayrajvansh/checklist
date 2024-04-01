@@ -40,7 +40,7 @@ const Home = () => {
 	return (
 		<section className="bg-white rounded-xl p-4 sm:p-10">
 			
-			<ListHeader listName="📋 All Checklists!"/>
+			<ListHeader listName="📋 All Checklists!" getData={getData}/>
 			{
 				sortedTaska.map((task)=> <ListItem key={task.id} task={task}/>)
 			}
