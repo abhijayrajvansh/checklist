@@ -12,7 +12,6 @@ interface ChecklistItem {
   date: string;
 }
 
-
 const Home = () => {
 	const userEmail = "abhijay@test.com";
 	const [tasks, setTasks  ] = useState<ChecklistItem[]>([]);
@@ -35,15 +34,13 @@ const Home = () => {
 		getData()
 	}, [])
 
-	console.log(tasks)
-
 	// sort by dates
 	const sortedTaska = tasks?.sort((a: ChecklistItem, b: ChecklistItem) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 	return (
 		<section className="bg-white rounded-xl p-4 sm:p-10">
 			
-			<ListHeader listName="🏝️ holiday checklist!"/>
+			<ListHeader listName="📋 All Checklists!"/>
 			{
 				sortedTaska.map((task)=> <ListItem key={task.id} task={task}/>)
 			}

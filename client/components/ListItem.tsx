@@ -14,15 +14,15 @@ interface ListItemProps {
 
 const ListItem:React.FC<ListItemProps> = ({task}) => {
   return (
-    <div className="py-4 flex items-center justify-between">
-      <Checkbox defaultSelected={false} lineThrough>
-        <p className="text-lg sm:text-2xl">{task.title}</p>
-      </Checkbox>
-      <div className="space-x-5">
-        <Button size="sm" className="font-medium text-sm bg-yellow-400 text-black">edit</Button>
-        <Button size="sm" className="font-medium text-sm bg-red-500">delete</Button>
+      <div className=" p-2 sm:p-4 flex items-center justify-between shadow-lg rounded-lg mt-2 border-2 border-default-700">
+        <Checkbox defaultSelected={false} lineThrough>
+          <p className="text-sm sm:text-lg">{task.title}</p>
+        </Checkbox>
+        <div className="space-x-5 items-end flex sm:block flex-col space-y-1">
+          <Button size="sm" variant="solid" className="font-medium text-sm" color="success">Edit</Button>
+          <Button size="sm" variant="solid" className="font-medium text-sm bg-red-500">Delete</Button>
+        </div>
       </div>
-    </div>
   )
 }
 
