@@ -43,7 +43,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
         },
         body: JSON.stringify(checklistData)
       })
-      setChecklistData({ user_email: '', title: '', progress: 30, date: ''})
+      setChecklistData({ user_email: 'abhijay@test.com', title: '', progress: 30, date: ''})
       getData()
     } 
     catch (error) {
