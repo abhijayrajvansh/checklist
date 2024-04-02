@@ -11,16 +11,17 @@ interface ChecklistItem {
 
 interface ListItemProps {
   task: ChecklistItem;
+  getData: () => Promise<any>
 }
 
-const ListItem:React.FC<ListItemProps> = ({task}) => {
+const ListItem:React.FC<ListItemProps> = ({task, getData}) => {
   return (
       <div className=" p-2 sm:p-4 flex items-center justify-between shadow-lg rounded-lg mt-2 border-2 border-default-700">
         <Checkbox defaultSelected={false} lineThrough>
           <p className="text-sm sm:text-lg">{task.title}</p>
         </Checkbox>
         <div className="space-x-5 items-end flex sm:block flex-col space-y-1">
-          <Modal job="edit" task={task}/>
+          <Modal getData={getData} job="edit" task={task}/>
           <Button size="sm" variant="solid" className="font-medium text-sm bg-red-500">Delete</Button>
         </div>
       </div>

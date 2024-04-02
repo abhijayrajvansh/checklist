@@ -42,7 +42,7 @@ const Home = () => {
 			
 			<ListHeader listName="📋 All Checklists!" getData={getData}/>
 			{
-				sortedTaska.map((task)=> <ListItem key={task.id} task={task}/>)
+				sortedTaska.map((task)=> <ListItem getData={getData} key={task.id} task={task}/>)
 			}
 
 		</section>

@@ -56,11 +56,11 @@ app.post("/checklists", async (req, res) => {
 app.put('/checklists/:id', async(req, res) => {
   try {
     const { id } = req.params;
-    const { title, progress, date} = req.body;
+    const { user_email, title, progress, date} = req.body;
 
     await pool.query(
-      "UPDATE checklists SET title = $1, progress = $2, date = $3 WHERE id = $4;", 
-      [title, progress, date, id]
+      "UPDATE checklists SET user_email = $1, title = $2, progress = $3, date = $4 WHERE id = $5;", 
+      [user_email, title, progress, date, id]
     );
     
     res.send({ msg: 'success'});

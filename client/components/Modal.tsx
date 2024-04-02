@@ -34,10 +34,9 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
     }));
   }
 
-  const createChecklist = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    // event.preventDefault()
+  const createChecklist = async () => {
     try {
-      const response = await fetch("http://localhost:8000/checklists", {
+      await fetch("http://localhost:8000/checklists", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,8 +51,21 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
     }
   }
 
-  const editChecklist = () => {
-    console.log('clicked on edit')
+  const editChecklist = async () => {
+    try {
+      await fetch("http://localhost:8000/checklists/" + `${task?.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checklistData)
+      })
+      setChecklistData({ user_email: '', title: '', progress: 30, date: ''})
+      getData()
+    } 
+    catch (error) {
+      console.log('error:', error)
+    }
   }
 
   return (
