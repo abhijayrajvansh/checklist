@@ -22,7 +22,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
     user_email: job === 'edit' ? task?.user_email : "abhijay@test.com",
     title: job === 'edit' ? task?.title : "",
     progress: job === 'edit' ? task?.progress : 30,
-    date: job === 'edit' ? "" : new Date()
+    date: new Date()
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
         },
         body: JSON.stringify(checklistData)
       })
-      setChecklistData({ user_email: 'abhijay@test.com', title: '', progress: 30, date: ''})
+      setChecklistData({ user_email: 'abhijay@test.com', title: '', progress: 30, date: new Date})
       getData()
     } 
     catch (error) {
@@ -60,7 +60,6 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
         },
         body: JSON.stringify(checklistData)
       })
-      setChecklistData({ user_email: '', title: '', progress: 30, date: ''})
       getData()
     } 
     catch (error) {
