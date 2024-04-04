@@ -17,6 +17,7 @@ interface ModalProps {
 
 const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const SERVER_URI = process.env.NEXT_PUBLIC_SERVER_URI;
 
   const [checklistData, setChecklistData  ] = useState({
     user_email: job === 'edit' ? task?.user_email : "abhijay@test.com",
@@ -36,7 +37,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
 
   const createChecklist = async () => {
     try {
-      await fetch("http://localhost:8000/checklists", {
+    await fetch(`${SERVER_URI}/checklists`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const ModalStructure:React.FC<ModalProps> = ({job, task, getData}) => {
 
   const editChecklist = async () => {
     try {
-      await fetch("http://localhost:8000/checklists/" + `${task?.id}`, {
+      await fetch(`${SERVER_URI}/checklists/${task?.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

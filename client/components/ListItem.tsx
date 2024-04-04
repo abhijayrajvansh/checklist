@@ -19,7 +19,7 @@ const ListItem:React.FC<ListItemProps> = ({task, getData}) => {
   const deleteChecklist = async () => {
     try {
       
-      await fetch('http://localhost:8000/checklists/' + `${task?.id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/checklists/${task?.id}`, {
         method: 'DELETE',
         headers : {
           'Content-Type' : 'application/json',

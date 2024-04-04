@@ -13,16 +13,13 @@ interface ChecklistItem {
 }
 
 const Home = () => {
-	const userEmail = "abhijay@test.com";
+	const loggedInUserEmail = "abhijay@test.com";
 	const [tasks, setTasks  ] = useState<ChecklistItem[]>([]);
-
-	let host_URI = 'http://localhost:8000/checklists/'
-	
-	const checklist_URI = host_URI + userEmail
+	const SERVER_URI = process.env.NEXT_PUBLIC_SERVER_URI
 
 	const getData = async () => {
 		try {	
-			const resposne = await fetch(checklist_URI)
+			const resposne = await fetch(`${SERVER_URI}/checklists/${loggedInUserEmail}`)
 			const json = await resposne.json()
 			setTasks(json)
 		} catch (error) {
