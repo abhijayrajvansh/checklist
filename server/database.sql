@@ -31,3 +31,7 @@ UPDATE checklists SET user_email = 'abhijay@test.com', title = 'modified checkli
 
 -- delete syntax
 DELETE FROM checklists WHERE id = '0';
+
+
+-- neon connection string:
+-- postgresql://checklistapp_owner:ZIAKL7yjdGP4@ep-rough-shape-a5dyywrx.us-east-2.aws.neon.tech/checklistapp?sslmode=require
