@@ -32,7 +32,7 @@ const Home = () => {
 	}, [])
 
 	// sort by dates
-	const sortedTaska = tasks?.sort((a: ChecklistItem, b: ChecklistItem) => new Date(a.date).getTime() - new Date(b.date).getTime());
+	const sortedTaska = tasks?.sort((a: ChecklistItem, b: ChecklistItem) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 	return (
 		<section className="bg-white rounded-xl p-4 sm:p-10">

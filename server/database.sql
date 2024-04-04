@@ -22,13 +22,11 @@ INSERT INTO checklists(
 
 INSERT INTO checklists (id, user_email, title, progress, date) VALUES ('4', 'abhijay@test.com', 'another checklist from express', 50, '2024-03-28');
 
-
 -- Read syntax
 SELECT * FROM checklists;
 
 -- update/edit syntax
 UPDATE checklists SET user_email = '', title = '', progress = 100 WHERE id = '';
-
 UPDATE checklists SET user_email = 'abhijay@test.com', title = 'modified checklist', progress = 80 WHERE id = '0';
 
 -- delete syntax
